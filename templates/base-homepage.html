@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head itemscope>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="google-site-verification" content="i31y9LkykhbExJwFyOJk4p-Zq55YF1A8Zv_nlfTDUJg" />
+        <meta name="46d57e19b8d95857104304e24b055fd7e75b4832" content="dd9dfc5d0fb65e538cc3d0a5399d9b32bdfacd51" />
+        <meta name="referrer" content="no-referrer-when-downgrade" />
+        <script src="https://code.jquery.com/jquery-3.6.3.min.js" integrity="sha256-pvPw+upLPUjgMXY0G+8O0xUf+/Im1MZjXxxgOcBQBXU=" crossorigin="anonymous"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js" integrity="sha256-VazP97ZCwtekAsvgPBSUwPFKdrwD3unUfSGVYrahUqU=" crossorigin="anonymous"></script>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cabin:400,500,600|Source+Sans+Pro:300,300i,400,400i,600" >
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/chartist.js/0.10.1/chartist.min.css" integrity="sha256-9LTMv8m7lGlT/6BWOhGVBXqw/x1etp8Qc5sTSDEvo9Y= sha384-awypxfgMNGDXVplMJmZDpq2D1bhXNJyGhh3IIM0O9ms0UNdvK/EHCE7bHbmXi0Gg sha512-3Q8Py2mtQjyFMoObDxlw0Spaq7WnKasgU2iZSpsLtq43v1MMmc/K/axSSvHfEli6TL7iliMwiI+GyzXPA3t3mg==" crossorigin="anonymous">
+        <link rel="canonical" href="https://electionsbycounty.com/" itemprop="url">
+        {% load static %}
+        <link href="{% static 'images/favicon.ico' %}" rel="shortcut icon" type="image/x-icon" />
+        <script src="{% static 'js/main.js' %}"></script>
+        <link href="{% static 'css/style.css' %}" rel="stylesheet">
+        <link href="{% static 'css/main.css' %}" rel="stylesheet">
+        <title  itemprop="name">{% block title %} {% endblock %}</title>
+    </head>
+    <body>
+        <div class="navbar navbar-inverse navbar-fixed-top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a href="{% url 'home' %}">
+                        <img itemprop="logo" src='{% static 'images/weblogo.png' %}' alt="" class="navbar-brand" /><span class="textlogo">Elections by County</span>
+                    </a>
+                </div>
+                <div class="navbar-collapse collapse navbar-right mainNavText">
+                    <ul class="nav navbar-nav">
+                        <li>Home</li>
+                        <li>Use</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="container body-content">
+            {% block content %}
+            {% endblock %}
+            <footer>
+                <div class="container">
+                    <a class="footertext footerleft" href="{% url 'home' %}">Elections by County © <script>document.write(new Date().getFullYear())</script></a>
+                    <a class="footertext footerright" href="{% url 'credit' %}">Credit</a>
+                </div>
+
+                <script>
+                    (function (i, s, o, g, r, a, m) {
+                        i['GoogleAnalyticsObject'] = r; i[r] = i[r] || function () {
+                            (i[r].q = i[r].q || []).push(arguments)
+                        }, i[r].l = 1 * new Date(); a = s.createElement(o),
+                        m = s.getElementsByTagName(o)[0]; a.async = 1; a.src = g; m.parentNode.insertBefore(a, m)
+                    })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+                    ga('create', 'UA-91746003-1', 'auto');
+                    ga('send', 'pageview');
+
+                </script>
+            </footer>
+        </div>
+        <script src="https://cdn.jsdelivr.net/chartist.js/0.10.1/chartist.min.js"  integrity="sha256-+G64aITI0UNsa7H5VVoqXsMALdixvpu5+nfg2UYVZZs= sha384-HdWIHUh+zrfGo6ASOpGmh6FnToK5tYHftEcHtjuoaT6qN94H6VX7zclzA/Hyio/o sha512-Xbx49yYLrYOvFMDSq3w3LPatu2+eZhk+Qy0sR/aLoq+1hRC8fjCLw+r2kG/b2NrYkRRDO7iEHkh1AOSM1Y8pug==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/chartist-plugin-legend/0.6.0/chartist-plugin-legend.min.js" integrity="sha256-pq1MeMEHeQ1gkHPgyWVm7hTnVBCj67OHZvUFLTlbtmM= sha384-BEZNT6JBK402FMVqptUsO9g5c26peq6Zn/EZvXm3qKEXlClpGaF//41Daps3V/nX sha512-v4wed7LFapSM1ssko2OirKZjqzmM3eRpaqAZ24ypT3Sg29BiS54J832lhtZYY5jpE7HUmFFIRjVGzHx2HtHtAA==" crossorigin="anonymous"></script>
+        <script src="{% static 'js/bootstrap.js' %}"></script>
+        <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet">
+        <script src="{% static 'js/modernizr-2.8.3.js' %}"></script>
+    </body>
+</html>

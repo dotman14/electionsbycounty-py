@@ -1,0 +1,43 @@
+{% extends "base-homepage.html" %}
+{% block title %} Elections By County {% endblock %}
+{% block content %}
+<div class="homepageTextDiv">
+    <div class="container col-md-4 col-md-offset-4">
+        <h3 class="homepageText">Search for Election by County</h3>
+    </div>
+</div>
+<div class="row center-block ">
+    <div class="container col-md-6 col-md-offset-3">
+            <div class="row">
+<div class="form-group col-md-6">
+<label class="control-label labelfont" for="County">County-State(abbrv.)</label>
+<input autofocus class="form-control ui-autocomplete-input" data-val="true" data-val-required="The County-State(abbrv.) field is required." id="County" name="County" required="True" type="text" value="" autocomplete="off">
+<span class="field-validation-valid text-danger" data-valmsg-for="County" data-valmsg-replace="true"></span>
+</div>
+ <div class="form-group col-md-4">
+<label class="control-label labelfont" for="Type">Type of Election</label>
+<select class="form-control" data-val="true" data-val-required="The Type of Election field is required." id="Type" name="Type" required="True"><option selected="selected" value=""></option>
+<option value="1">Presidential</option>
+<option value="2">Governorship</option>
+</select>
+<span class="infoText">Currently working on Governorship elections.</span>
+<span class="field-validation-valid text-danger" data-valmsg-for="Type" data-valmsg-replace="true"></span>
+</div>
+<div class="form-group col-md-2">
+<label class="control-label"></label>
+<button class="btn btn-primary" type="submit">Search</button>
+</div>
+</div></div></div>
+
+<div class="homepageQuote">
+    <div class="container col-md-4 col-md-offset-4">
+        <div class="quoteBox">
+            <h4 class="quoteText">{{ quote_obj.quote_text }}</h4>
+            <h4 class="quoteName">{{ quote_obj.name }}</h4>
+            <h4 class="quoteYear">{{ quote_obj.quote_date }}</h4>
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}

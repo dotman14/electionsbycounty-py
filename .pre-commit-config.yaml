@@ -1,0 +1,48 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.1.0
+    hooks:
+      - id: check-ast
+      - id: check-case-conflict
+      - id: check-docstring-first
+      - id: check-json
+      - id: debug-statements
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+      - id: mixed-line-ending
+  - repo: https://github.com/psf/black
+    rev: '22.8.0'
+    hooks:
+      - id: black
+        exclude: |
+            (?x)(
+                ^.*\b(migrations)\b.*$|
+                ^.*wsgi.py.*$|
+                ^.*manage.py.*$|
+                ^.*settings_ci.py.*$|
+                ^.*asgi.py.*$
+            )
+        args: ["--line-length", "100"]
+
+  - repo: https://github.com/pycqa/isort
+    rev: '5.10.1'
+    hooks:
+      - id: isort
+        name: isort
+
+  - repo: https://github.com/pycqa/flake8
+    rev: '5.0.4'
+    hooks:
+      - id: flake8
+        args: ['--config=.flake8']
+  - repo: https://github.com/rtts/djhtml
+    rev: v1.5.2
+    hooks:
+      - id: djhtml
+#    args: [--tabwidth=4]
+
+  - repo: https://github.com/asottile/pyupgrade
+    rev: v2.38.2
+    hooks:
+      - id: pyupgrade
