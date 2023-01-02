@@ -25,7 +25,7 @@ SECRET_KEY = "django-insecure-o8ff&bai_djfc(c9^t^dhnqs^f2fzxem!iak86t-0)=j#31fus
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["localhost", "127.0.0.1"]
 
 
 # Application definition
@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     "django.contrib.sessions",
     "django.contrib.messages",
     "django.contrib.staticfiles",
+    "django.contrib.humanize",
     "election",
     "django_browser_reload",
 ]
@@ -66,6 +67,9 @@ TEMPLATES = [
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
             ],
+            "libraries": {
+                "custom_filters": "election.templatetags.custom_filters",
+            },
         },
     },
 ]
@@ -78,8 +82,17 @@ WSGI_APPLICATION = "electionsbycounty.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        # "ENGINE": "django.db.backends.sqlite3",
+        # "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql_psycopg2",
+        "NAME": "postgres",
+        "USER": "postgres",
+        "PASSWORD": "postgres",
+        "HOST": "localhost",
+        "PORT": 5432,
+        "OPTIONS": {
+            "options": "-c search_path=postgres,ebc",
+        },
     }
 }
 

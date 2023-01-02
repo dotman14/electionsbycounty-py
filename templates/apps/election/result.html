@@ -1,0 +1,79 @@
+{% extends "base-homepage.html" %}
+{% load static %}
+{% load humanize %}
+{% load custom_filters %}
+{% block title %} {{ params|result_title }} {% endblock %}
+{% block content %}
+    <div class="fixedSubHeader sticky-xl-top py-4">
+        <h5 class="display-56 mb-3">{{ params|result_title }}</h5>
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a href={% url 'home' %}>Home</a></li>
+                <li class="breadcrumb-item"><a href={% url 'all_election_type' %}>Results</a></li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <a href="{% url 'all_state' election_type=params.election_type|lower  %}">{{ params.election_type }} Elections</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">
+                    <a href="{% url 'all_state_county' election_type=params.election_type|lower state_code=params.state_code|lower  %}"> {{ params.state_code }}</a>
+                </li>
+                <li class="breadcrumb-item active" aria-current="page">{{ params.county }}</li>
+            </ol>
+        </nav>
+    </div>
+    <section id="cd-timeline" class="cd-container">
+        {% for e_data, s_data, note_data in election_data %}
+            <div class="cd-timeline-block" id="{{ e_data.date_of_election|str_to_date }}">
+                <div class="cd-timeline-img cd-picture">
+                    {% with 'images/'|add:e_data.vote_data.0.3 as image_static %}
+                        <img alt="" src="{% static image_static %}"/>
+                    {% endwith %}
+                </div>
+                <div class="cd-timeline-content" id="pic">
+                    <p><span class="yearDisplay">{{ e_data.date_of_election|str_to_date }}</span></p>
+                    <table class="table caption-top table-borderless table-sm mb-0 vote-table">
+                        <tbody>
+                            {% for candidates in e_data.vote_data %}
+                                <tr style="background-color: {% if candidates.1 == None %} rgba(0,0,0,0.12) {% else %} {{ candidates.4 }} {% endif %}">
+                                    <td>
+                                        {% if candidates.1 == None %}
+                                            Other Candidates
+                                        {% else %}
+                                            {{ candidates.1 }}
+                                        {% endif %}
+                                    </td>
+                                    <td >{{ candidates.0|intcomma }}</td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                    <div class="table-responsive">
+                        <table class="table caption-top table-borderless table-sm mb-0 p-0 text-muted fs-6">
+                            <caption>State Total: {{ s_data.state_total|intcomma }} votes</caption>
+                            <thead>
+                                <tr>
+                                    <th scope="col" class="p-0"></th>
+                                    <th scope="col" class="p-0">State Vote</th>
+                                    <th scope="col" class="p-0">State %</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                {% for e_stat_tuple in s_data.total_stats %}
+                                    {% for key, value in e_stat_tuple.0.items %}
+                                        <tr>
+                                            <td class="p-0">{{ key }}</td>
+                                            <td class="p-0">{{ value|intcomma }}</td>
+                                            <td class="p-0">{{ e_stat_tuple.1 }}</td>
+                                        </tr>
+                                    {% endfor %}
+                                {% endfor %}
+                            </tbody>
+                        </table>
+                    </div>
+                {% if note_data.election_notes %}
+                    <span class="cd-date bg-warning p-2 text-dark bg-opacity-10">{{ note_data.election_notes }}</span>
+                {% endif %}
+                </div>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}

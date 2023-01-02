@@ -16,12 +16,42 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import include, path
 
-import election.views
+from election.views import (
+    ajax_get_county,
+    all_county_for_state,
+    all_election_type,
+    all_state,
+    credit,
+    home,
+    result,
+    use,
+)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", election.views.home, name="home"),
-    path("credit", election.views.credit, name="credit"),
-    path("use", election.views.use, name="use"),
+    path("", home, name="home"),
+    path("credit", credit, name="credit"),
+    path("getcounty/", ajax_get_county, name="auto-ajax"),
+    path("use", use, name="use"),
+    path(
+        "result/<str:election_type>/<str:state_code>/",
+        all_county_for_state,
+        name="all_state_county",
+    ),
+    path(
+        "result/<str:election_type>/",
+        all_state,
+        name="all_state",
+    ),
+    path(
+        "result/",
+        all_election_type,
+        name="all_election_type",
+    ),
+    path(
+        "result/<str:election_type>/<str:state_code>/<str:county>",
+        result,
+        name="result",
+    ),
     path("__reload__/", include("django_browser_reload.urls")),
 ]

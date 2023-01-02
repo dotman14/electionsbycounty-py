@@ -1,43 +1,42 @@
 {% extends "base-homepage.html" %}
 {% block title %} Elections By County {% endblock %}
 {% block content %}
-<div class="homepageTextDiv">
-    <div class="container col-md-4 col-md-offset-4">
-        <h3 class="homepageText">Search for Election by County</h3>
-    </div>
-</div>
-<div class="row center-block ">
-    <div class="container col-md-6 col-md-offset-3">
-            <div class="row">
-<div class="form-group col-md-6">
-<label class="control-label labelfont" for="County">County-State(abbrv.)</label>
-<input autofocus class="form-control ui-autocomplete-input" data-val="true" data-val-required="The County-State(abbrv.) field is required." id="County" name="County" required="True" type="text" value="" autocomplete="off">
-<span class="field-validation-valid text-danger" data-valmsg-for="County" data-valmsg-replace="true"></span>
-</div>
- <div class="form-group col-md-4">
-<label class="control-label labelfont" for="Type">Type of Election</label>
-<select class="form-control" data-val="true" data-val-required="The Type of Election field is required." id="Type" name="Type" required="True"><option selected="selected" value=""></option>
-<option value="1">Presidential</option>
-<option value="2">Governorship</option>
-</select>
-<span class="infoText">Currently working on Governorship elections.</span>
-<span class="field-validation-valid text-danger" data-valmsg-for="Type" data-valmsg-replace="true"></span>
-</div>
-<div class="form-group col-md-2">
-<label class="control-label"></label>
-<button class="btn btn-primary" type="submit">Search</button>
-</div>
-</div></div></div>
-
-<div class="homepageQuote">
-    <div class="container col-md-4 col-md-offset-4">
-        <div class="quoteBox">
-            <h4 class="quoteText">{{ quote_obj.quote_text }}</h4>
-            <h4 class="quoteName">{{ quote_obj.name }}</h4>
-            <h4 class="quoteYear">{{ quote_obj.quote_date }}</h4>
-
+    <div class="d-flex flex-column min-vh-70 justify-content-center align-items-center">
+        <h3 class="fs-3">Lookup a county</h3>
+        <form method="post" class="needs-validation row g-3 mt-4">
+            {% csrf_token %}
+            <div class="form-group col-md-7">
+                <label class="control-label" for="{{ election_form.id_for_label }}">{{ election_form.county_state.label }}</label>
+                {{ election_form.county_state }}
+                {% if election_form.county_state.errors %}
+                    <div class="invalid-feedback">
+                        {{ election_form.county_state.errors.as_text }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="form-group col-md-4">
+                <label class="control-label" for="{{ election_form.election_type.id_for_label }}">{{ election_form.election_type.label }}</label>
+                {{ election_form.election_type }}
+                {% if election_form.election_type.errors %}
+                    <div class="invalid-feedback">
+                        {{ election_form.election_type.errors.as_text }}
+                    </div>
+                {% endif %}
+            </div>
+            <div class="control-group col-md-1">
+                <label class="form-label"></label>
+                <button class="btn btn-primary" type="submit">Search</button>
+            </div>
+        </form>
+        <div class="container col-md-5 mt-5">
+            <figure class="text-end">
+                <blockquote class="blockquote">
+                    <p>{{ quote_obj.quote_text }}</p>
+                </blockquote>
+                <figcaption class="blockquote-footer">
+                    {{ quote_obj.quote_name }} <cite title="Source Title">{{ quote_obj.quote_date }}</cite>
+                </figcaption>
+            </figure>
         </div>
     </div>
-</div>
-
 {% endblock %}
