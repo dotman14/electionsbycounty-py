@@ -3,27 +3,28 @@
 {% block content %}
     <div class="d-flex flex-column min-vh-70 justify-content-center align-items-center">
         <h3 class="fs-3">Lookup a county</h3>
-        <form method="post" class="needs-validation row g-3 mt-4">
+        <p class="lead fs-6">County-State field is in the format: <span class="fw-normal">County | ST</span></p>
+        <form method="post" class="needs-validation row mt-5">
             {% csrf_token %}
-            <div class="form-group col-md-7">
+            <div class="col-md-6">
                 <label class="control-label" for="{{ election_form.id_for_label }}">{{ election_form.county_state.label }}</label>
                 {{ election_form.county_state }}
                 {% if election_form.county_state.errors %}
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback was-validated">
                         {{ election_form.county_state.errors.as_text }}
                     </div>
                 {% endif %}
             </div>
-            <div class="form-group col-md-4">
+            <div class="col-md-4">
                 <label class="control-label" for="{{ election_form.election_type.id_for_label }}">{{ election_form.election_type.label }}</label>
                 {{ election_form.election_type }}
                 {% if election_form.election_type.errors %}
-                    <div class="invalid-feedback">
+                    <div class="invalid-feedback was-validated">
                         {{ election_form.election_type.errors.as_text }}
                     </div>
                 {% endif %}
             </div>
-            <div class="control-group col-md-1">
+            <div class="col-md-1">
                 <label class="form-label"></label>
                 <button class="btn btn-primary" type="submit">Search</button>
             </div>

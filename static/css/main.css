@@ -117,11 +117,6 @@ a.anchor {
     transition: all 0.8s ease;
 }
 
-.btn-primary:hover {
-    color: #fff;
-    background-color: rgb(202, 67, 66);
-    border-color: rgb(202, 67, 66);
-}
 
 .floatleft {
     float: left;
@@ -377,17 +372,6 @@ hr {
     overflow-y: auto !important;
     overflow-x: hidden !important;
     font-size: 14px !important;
-}
-
-
-
-.ui-state-active,
-.ui-widget-content .ui-state-active,
-.ui-widget-header .ui-state-active, .ui-widget,
-a.ui-button:active,
-.ui-button:active,
-.ui-button.ui-state-active:hover {
-    font-family: 'Cabin', serif !important;
 }
 
 
