@@ -15,7 +15,7 @@ class ElectionForm(forms.Form):
             if i == "election_type":
                 f.widget.attrs["class"] = "form-select form-control-sm"
             if i == "county_state":
-                f.widget.attrs["class"] = "form-control"
+                f.widget.attrs["class"] = "form-control ui-widget"
 
     election_type = ChoiceField(
         label="Type of Election", choices=ElectionData.ELECTION_TYPE, required=True
@@ -26,13 +26,15 @@ class ElectionForm(forms.Form):
 
     def clean(self) -> Dict[str, Any]:
         def split_county_state(c_s: str) -> Tuple:
-            if c_s:
+            if not c_s:
+                raise ValidationError("This field is required")
+            else:
                 _count_state = c_s.split(" | ")
                 _state = _count_state[-1]
                 if len(_state) != 2 or len(_count_state) < 2:
                     self.add_error(
                         "county_state",
-                        ValidationError("Make sure you use 'County | ST' format"),
+                        ValidationError("Make sure you use County | ST format"),
                     )
                 _county = "-".join(_count_state[0:-1])
                 return _county, _state
