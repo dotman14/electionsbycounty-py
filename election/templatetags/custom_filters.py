@@ -23,3 +23,8 @@ def result_title_breadcrumb(params: dict):
 @register.filter(name="str_to_date")
 def str_to_date(value):
     return datetime.datetime.strptime(str(value), "%Y%m%d").date()
+
+
+@register.filter(name="zip_to_list")
+def zip_to_list(zipped_obj):
+    return list(zipped_obj)
