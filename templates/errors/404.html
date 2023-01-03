@@ -1,0 +1,17 @@
+{% extends "base-homepage.html" %}
+{% load static %}
+{% load humanize %}
+{% load custom_filters %}
+{% block title %} 404 {% endblock %}
+{% block content %}
+    <div class="d-flex align-items-center justify-content-center min-vh-70">
+        <div class="text-center">
+            <h1 class="display-1 fw-bold">404</h1>
+            <p class="fs-3"> <span class="text-danger"> Page not found.</span></p>
+            <p class="lead">
+                The page you’re looking for does not exist.
+            </p>
+            <a href="{% url 'home' %}" class="btn btn-primary">Go Home</a>
+        </div>
+    </div>
+{% endblock %}

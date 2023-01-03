@@ -1,0 +1,17 @@
+{% extends "base-homepage.html" %}
+{% load static %}
+{% load humanize %}
+{% load custom_filters %}
+{% block title %} 500 {% endblock %}
+{% block content %}
+    <div class="d-flex align-items-center justify-content-center min-vh-70">
+        <div class="text-center">
+            <h1 class="display-1 fw-bold">500</h1>
+            <p class="fs-3"> <span class="text-danger"> Server Error.</span></p>
+            <p class="lead">
+                This was most likely cause by us. Please report to <a href="mailto:dotunoyesanmi@gmail.com"> email</a>
+            </p>
+            <a href="{% url 'home' %}" class="btn btn-primary">Go Home</a>
+        </div>
+    </div>
+{% endblock %}

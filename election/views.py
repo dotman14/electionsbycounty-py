@@ -1,6 +1,11 @@
 import random
 
-from django.http import HttpResponseNotFound, HttpResponseRedirect, JsonResponse
+from django.http import (
+    Http404,
+    HttpResponseNotFound,
+    HttpResponseRedirect,
+    JsonResponse,
+)
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
@@ -116,3 +121,11 @@ def all_election_type(request):
         "apps/election/all_election_type.html",
         {"election_types": _election_types},
     )
+
+
+def error_500(request):
+    return render(request, "errors/500.html", status=500)
+
+
+def error_404(request, exception):
+    return render(request, "errors/404.html", status=404)
