@@ -19,6 +19,8 @@ from election.models import County, ElectionData, ElectionNote, Quote, State
 @require_http_methods(["GET", "POST"])
 def home(request):
     quotes_pk = Quote.objects.values_list("pk", flat=True)
+    if not quotes_pk:
+        raise Http404()
     quote_obj = Quote.objects.get(pk=random.choice(quotes_pk))
     if request.method == "POST":
         election_form_data = ElectionForm(request.POST)
