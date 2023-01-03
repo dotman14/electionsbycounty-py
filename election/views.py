@@ -61,6 +61,8 @@ def ajax_get_county(request):
 def result(request, election_type, state_code, county):
     _state_id = get_object_or_404(State, code__iexact=state_code)
     election = ElectionData.objects.get_election_data(election_type, county, _state_id)
+    if not election:
+        raise Http404()
     state_total_pct = ElectionData.objects.party_state_total(election_type, _state_id)
     notes = ElectionNote.objects.get_election_notes(election_type, county, _state_id)
     election_data = zip(election, state_total_pct, notes)
@@ -92,8 +94,10 @@ def use(request):
 def all_county_for_state(request, election_type: str, state_code: str):
     _state_id = get_object_or_404(State, code__iexact=state_code)
     if not any([x[0] == election_type.lower() for x in ElectionData.ELECTION_TYPE]):
-        print("Error")
+        raise Http404()
     _county = ElectionData.objects.get_all_state_county(election_type, _state_id)
+    if not _county:
+        raise Http404()
     return render(
         request,
         "apps/election/state_county.html",
@@ -104,7 +108,7 @@ def all_county_for_state(request, election_type: str, state_code: str):
 @require_http_methods(["GET"])
 def all_state(request, election_type: str):
     if not any([x[0] == election_type.lower() for x in ElectionData.ELECTION_TYPE]):
-        print("Error")
+        raise Http404()
     _states = ElectionData.objects.get_all_state(election_type)
     return render(
         request,
