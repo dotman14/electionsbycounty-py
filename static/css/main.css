@@ -165,10 +165,6 @@ a.anchor {
     margin: 2px 0 0 0;
 }
 
-.fixedSubHeader {
-    background-color: #ffffff !important;
-}
-
 .homepageImage {
     background-image: url('Images/homepageImage.svg');
 }
@@ -199,45 +195,15 @@ a.anchor {
     line-height: 50px;
 }
 
-.dropdown-menu {
-    box-shadow: 0 1px 1px #000000 !important;
-    box-shadow: 0 1px 1px rgba(0, 0, 0, .175) !important;
-}
 
 .myWidth {
     margin: 0 0 0 15px;
 }
 
 .navbar-inverse {
-    background-color: rgb(236, 236, 236) !important;
-    border-color: #ececec !important;
-    box-shadow: 0 0 5px #000000;
-    box-shadow: 0 0 5px rgba(0, 0, 0, 0.15) !important;
-    border-bottom: 1px solid #c8c8c8 !important;
-}
-
-.navbar-inverse .navbar-brand {
-        color: #333333 !important;
-    }
-
-    .navbar-inverse .navbar-nav > li > a {
-        color: #000000 !important;
-        font-family: 'Source Sans Pro', sans-serif !important;
-        font-size: 15px;
-    }
-
-    .navbar-nav > li > a {
-        padding: 10px 8px !important;
-    }
-
-
-.navbar-inverse .navbar-nav > li > a:hover {
-    color: #6f6f6f !important;
-}
-
-.navbar-inverse .navbar-nav > li > a:hover, .navbar-inverse .navbar-nav > li > a:focus {
-    color: #fff;
-    background-color: transparent;
+    border-color: #dee2e6 !important;
+    box-shadow: 0 0 5px rgba(0, 0, 0, .15) !important;
+    border-bottom: 1px solid #dee2e6 !important;
 }
 
 .footertext a {
@@ -463,6 +429,12 @@ hr {
     }
 }
 
+
+
+    .fixedSubHeader {
+        padding-top: 6rem;
+    }
+
 @media only screen and (min-width: 120px) and (max-width: 479px) {
     .homepageTextDiv {
         margin: 40px 0 30px 0;
@@ -478,8 +450,11 @@ hr {
     }
 
     .fixedSubHeader {
-        margin: 0 0 0 -11px;
-    }
+    padding-top: 5rem ;
+}
+    .resultHeaderShadow{
+    border-bottom: 1px solid #dee2e6;
+}
 
     .graph {
         display: none;
@@ -1114,4 +1089,9 @@ hr {
 
 .vote-table {
     border-collapse: separate !important;
+}
+
+
+.resultHeaderShadow{
+    border-bottom: 1px solid #dee2e6;
 }

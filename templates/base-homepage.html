@@ -19,10 +19,11 @@
         <title  itemprop="name">{% block title %} {% endblock %}</title>
     </head>
     <body>
-        <div class="container">
-            <nav class="navbar navbar-expand-lg">
-                <div class="container-fluid p-0">
-                    <a class="navbar-brand d-lg-inline-block fw-bold fs-3" href="{% url 'home' %}"> Elections By County </a>
+        <header>
+            <!-- Fixed navbar -->
+            <nav class="navbar navbar-expand-md navbar-light fixed-top bg-light navbar-inverse">
+                <div class="container">
+                    <a class="navbar-brand d-lg-inline-block fw-bold fs-4" href="{% url 'home' %}"> Elections By County </a>
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                     </button>
@@ -41,6 +42,8 @@
                     </div>
                 </div>
             </nav>
+        </header>
+        <div class="container">
             {% block content %}
             {% endblock %}
         </div>
