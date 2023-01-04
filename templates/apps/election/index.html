@@ -6,7 +6,7 @@
         <p class="lead fs-6">County-State field is in the format: <span class="fw-normal">County | ST</span></p>
         <form method="post" class="needs-validation row mt-5">
             {% csrf_token %}
-            <div class="col-md-6">
+            <div class="col-md-6 mb-3">
                 <label class="control-label" for="{{ election_form.id_for_label }}">{{ election_form.county_state.label }}</label>
                 {{ election_form.county_state }}
                 {% if election_form.county_state.errors %}
@@ -15,7 +15,7 @@
                     </div>
                 {% endif %}
             </div>
-            <div class="col-md-4">
+            <div class="col-md-4 mb-3">
                 <label class="control-label" for="{{ election_form.election_type.id_for_label }}">{{ election_form.election_type.label }}</label>
                 {{ election_form.election_type }}
                 {% if election_form.election_type.errors %}
@@ -29,7 +29,7 @@
                 <button class="btn btn-primary" type="submit">Search</button>
             </div>
         </form>
-        <div class="container col-md-5 mt-5">
+        <div class="container col-md-5 mt-5 mb-3">
             <figure class="text-end">
                 <blockquote class="blockquote">
                     <p>{{ quote_obj.quote_text }}</p>
