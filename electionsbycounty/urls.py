@@ -58,3 +58,4 @@ urlpatterns = [
 
 handler404 = "election.views.error_404"
 handler500 = "election.views.error_500"
+handler403 = "election.views.error_403"
