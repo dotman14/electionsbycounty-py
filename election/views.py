@@ -18,7 +18,6 @@ CACHE_TTL = getattr(settings, "CACHE_TTL", DEFAULT_TIMEOUT)
 # Create your views here.
 
 
-@cache_page(CACHE_TTL)
 @require_http_methods(["GET", "POST"])
 def home(request):
     quotes = Quote.objects.values("quote_text", "quote_date", "quote_name").order_by("?").first()
