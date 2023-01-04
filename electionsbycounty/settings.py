@@ -160,18 +160,18 @@ CSRF_COOKIE_SECURE = True
 SECURE_HSTS_PRELOAD = True
 
 
-sentry_sdk.init(
-    dsn=os.getenv("SENTRY_DNS"),
-    integrations=[
-        DjangoIntegration(),
-    ],
-
-    # Set traces_sample_rate to 1.0 to capture 100%
-    # of transactions for performance monitoring.
-    # We recommend adjusting this value in production.
-    traces_sample_rate=1.0,
-
-    # If you wish to associate users to errors (assuming you are using
-    # django.contrib.auth) you may enable sending PII data.
-    send_default_pii=True
-)
+# making sure we only send errors to Sentry if generated on Heroku
+if os.getenv("EBC_HEROKU_ENV") == "heroku":
+    sentry_sdk.init(
+        dsn=os.getenv("SENTRY_DNS"),
+        integrations=[
+            DjangoIntegration(),
+        ],
+        # Set traces_sample_rate to 1.0 to capture 100%
+        # of transactions for performance monitoring.
+        # We recommend adjusting this value in production.
+        traces_sample_rate=1.0,
+        # If you wish to associate users to errors (assuming you are using
+        # django.contrib.auth) you may enable sending PII data.
+        send_default_pii=True,
+    )
