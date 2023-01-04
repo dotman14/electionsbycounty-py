@@ -1,5 +1,5 @@
-import random
-
+from django.conf import settings
+from django.core.cache.backends.base import DEFAULT_TIMEOUT
 from django.http import (
     Http404,
     HttpResponseNotFound,
@@ -8,20 +8,22 @@ from django.http import (
 )
 from django.shortcuts import get_object_or_404, render
 from django.urls import reverse
+from django.views.decorators.cache import cache_page
 from django.views.decorators.http import require_http_methods
 
 from election.forms import ElectionForm
 from election.models import County, ElectionData, ElectionNote, Quote, State
 
+CACHE_TTL = getattr(settings, "CACHE_TTL", DEFAULT_TIMEOUT)
 # Create your views here.
 
 
+@cache_page(CACHE_TTL)
 @require_http_methods(["GET", "POST"])
 def home(request):
-    quotes_pk = Quote.objects.values_list("pk", flat=True)
-    if not quotes_pk:
+    quotes = Quote.objects.values("quote_text", "quote_date", "quote_name").order_by("?").first()
+    if not quotes:
         raise Http404()
-    quote_obj = Quote.objects.get(pk=random.choice(quotes_pk))
     if request.method == "POST":
         election_form_data = ElectionForm(request.POST)
         if election_form_data.is_valid():
@@ -39,16 +41,17 @@ def home(request):
             return render(
                 request,
                 "apps/election/index.html",
-                {"quote_obj": quote_obj, "election_form": election_form_data},
+                {"quote_obj": quotes, "election_form": election_form_data},
             )
     election_form = ElectionForm()
     return render(
         request,
         "apps/election/index.html",
-        {"quote_obj": quote_obj, "election_form": election_form},
+        {"quote_obj": quotes, "election_form": election_form},
     )
 
 
+@cache_page(CACHE_TTL)
 @require_http_methods(["GET"])
 def ajax_get_county(request):
     query = request.GET.get("prefix", "")
@@ -59,6 +62,7 @@ def ajax_get_county(request):
         return HttpResponseNotFound()
 
 
+@cache_page(CACHE_TTL)
 @require_http_methods(["GET"])
 def result(request, election_type, state_code, county):
     _state_id = get_object_or_404(State, code__iexact=state_code)
@@ -92,6 +96,7 @@ def use(request):
     return render(request, "apps/election/use.html")
 
 
+@cache_page(CACHE_TTL)
 @require_http_methods(["GET"])
 def all_county_for_state(request, election_type: str, state_code: str):
     _state_id = get_object_or_404(State, code__iexact=state_code)
@@ -107,6 +112,7 @@ def all_county_for_state(request, election_type: str, state_code: str):
     )
 
 
+@cache_page(CACHE_TTL)
 @require_http_methods(["GET"])
 def all_state(request, election_type: str):
     if not any([x[0] == election_type.lower() for x in ElectionData.ELECTION_TYPE]):
@@ -119,6 +125,7 @@ def all_state(request, election_type: str):
     )
 
 
+@cache_page(CACHE_TTL)
 @require_http_methods(["GET"])
 def all_election_type(request):
     _election_types = ElectionData.objects.get_all_election_type()
