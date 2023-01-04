@@ -54,7 +54,6 @@ header {
 
 #cd-timeline {
     position: relative;
-    padding: 5em 0;
     margin-top: 2em;
     margin-bottom: 2em;
 }
@@ -243,7 +242,7 @@ header {
     margin-left: 60px;
     background: white;
     padding: 0.6em !important;
-    /*box-shadow: 0 3px 0 #E8E8E8;*/
+    border-left-color: #dee2e6;
 }
 
     .cd-timeline-content p {
@@ -330,7 +329,6 @@ header {
         margin-left: 0;
         padding: 1em;
         width: 45%;
-         /*box-shadow: #e9ecef 1px 1px 6px !important;*/
     }
 
         .cd-timeline-content::before {
