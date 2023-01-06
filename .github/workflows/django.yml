@@ -59,10 +59,26 @@ jobs:
       run: |
         echo 'Hello, ${{github.actor}}'
         echo '${{ github.event.pull_request.user.login }}'
+        echo 'Hello, ${{github.actor}}'
+        echo '${{ github.actor != 'dependabot[bot]' }}'
+        echo '${{ github.event.pull_request.user.login == 'dependabot[bot]' }}'
+        echo '${{ github.event.pull_request.user.login }}'
+        echo '${{ github.event.pull_request.user }}'
+        echo '${{ github.event.pull_request }}'
+        echo '${{ github.event }}'
+        echo '${{ github }}'
     - name: CHeck if action was triggered by somebody else
       if: ${{ github.actor == 'dependabot[bot]' }}
       run: |
         echo 'This should not run'
+        echo 'Hello, ${{github.actor}}'
+        echo '${{ github.actor != 'dependabot[bot]' }}'
+        echo '${{ github.event.pull_request.user.login == 'dependabot[bot]' }}'
+        echo '${{ github.event.pull_request.user.login }}'
+        echo '${{ github.event.pull_request.user }}'
+        echo '${{ github.event.pull_request }}'
+        echo '${{ github.event }}'
+        echo '${{ github }}'
 #     - name: Deploy to Heroku
 #       uses: akhileshns/heroku-deploy@v3.12.12
 #       if: ${{ github.actor == 'dotman14' }}
