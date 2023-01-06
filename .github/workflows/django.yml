@@ -58,6 +58,7 @@ jobs:
       if: ${{ github.actor == 'dotman14' }}
       run: |
         echo 'Hello, ${{github.actor}}'
+        echo '${{ github.event.pull_request.user.login }}'
     - name: CHeck if action was triggered by somebody else
       if: ${{ github.actor == 'dependabot[bot]' }}
       run: |
