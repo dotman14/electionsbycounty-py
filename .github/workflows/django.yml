@@ -54,19 +54,17 @@ jobs:
     - name: Run Test
       run: |
         pytest
-    - name: Check github actor
+    - name: Check if action was triggered by me
+      if: ${{ github.actor == 'dotman14' }}
       run: |
         echo 'Hello, ${{github.actor}}'
-        echo '${{ github.actor != 'dependabot[bot]' }}'
-        echo '${{ github.event.pull_request.user.login == 'dependabot[bot]' }}'
-        echo '${{ github.event.pull_request.user.login }}'
-        echo '${{ github.event.pull_request.user }}'
-        echo '${{ github.event.pull_request }}'
-        echo '${{ github.event }}'
-        echo '${{ github }}'
+    - name: CHeck if action was triggered by somebody else
+      if: ${{ github.actor == 'dependabot[bot]' }}
+      run: |
+        echo 'This should not run'
 #     - name: Deploy to Heroku
 #       uses: akhileshns/heroku-deploy@v3.12.12
-#       if: ${{ github.actor != 'dependabot[bot]' }}
+#       if: ${{ github.actor == 'dotman14' }}
 #       with:
 #         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
 #         heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
