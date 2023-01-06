@@ -57,7 +57,8 @@ jobs:
     - name: Check github actor
       run: |
         echo 'Hello, ${{github.actor}}'
-        echo 'Hello, ${{github.triggering_actor}}'
+        echo '${{ github.actor != 'dependabot[bot]' }}'
+        echo '${{ github.actor == 'dependabot[bot]' }}'
 #     - name: Deploy to Heroku
 #       uses: akhileshns/heroku-deploy@v3.12.12
 #       if: ${{ github.actor != 'dependabot[bot]' }}
