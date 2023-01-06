@@ -54,9 +54,14 @@ jobs:
     - name: Run Test
       run: |
         pytest
-    - name: Deploy to Heroku
-      uses: akhileshns/heroku-deploy@v3.12.12
-      with:
-        heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
-        heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
-        heroku_email: ${{ secrets.HEROKU_EMAIL }}
+    - name: Check github actor
+      run: |
+        echo 'Hello, ${{github.actor}}'
+        echo 'Hello, ${{github.triggering_actor}}'
+#     - name: Deploy to Heroku
+#       uses: akhileshns/heroku-deploy@v3.12.12
+#       if: ${{ github.actor != 'dependabot[bot]' }}
+#       with:
+#         heroku_api_key: ${{ secrets.HEROKU_API_KEY }}
+#         heroku_app_name: ${{ secrets.HEROKU_APP_NAME }}
+#         heroku_email: ${{ secrets.HEROKU_EMAIL }}
