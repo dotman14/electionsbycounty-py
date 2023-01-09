@@ -89,8 +89,12 @@ class ElectionDataManager(models.Manager):
             self.values("date_of_election")
             .filter(election_type__iexact=election_type, state_id=state_id)
             .annotate(
-                republican=Sum(Case(When(party_id=1, then=F("total_vote")), default=0)),
-                democratic=Sum(Case(When(party_id=2, then=F("total_vote")), default=0)),
+                republican=Sum(
+                    Case(When(party__party_name="Republican", then=F("total_vote")), default=0)
+                ),
+                democratic=Sum(
+                    Case(When(party__party_name="Democratic", then=F("total_vote")), default=0)
+                ),
             )
             .annotate(state_total_all=Sum("total_vote"))
             .annotate(state_total_other=F("state_total_all") - (F("republican") + F("democratic")))
