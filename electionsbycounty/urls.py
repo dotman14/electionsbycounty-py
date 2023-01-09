@@ -27,7 +27,7 @@ from election.views import (  # use,
 )
 
 urlpatterns = [
-    path("admin/", admin.site.urls),
+    path("ebc-admin-page/", admin.site.urls),
     path("", home, name="home"),
     path("credit", credit, name="credit"),
     path("getcounty/", ajax_get_county, name="auto-ajax"),
