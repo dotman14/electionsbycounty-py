@@ -1,5 +1,6 @@
 import datetime
-from unittest import TestCase
+
+from django.test import TestCase
 
 from election.templatetags.custom_filters import result_title, str_to_date, zip_to_list
 

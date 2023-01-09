@@ -1,0 +1,10 @@
+[run]
+branch = true
+omit =
+    */migrations/*
+    */settings*
+    */wsgi.py
+    */asgi.py
+    manage.py
+source = electionsbycounty
+

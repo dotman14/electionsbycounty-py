@@ -90,9 +90,9 @@ def credit(request):
     return render(request, "apps/election/credit.html")
 
 
-@require_http_methods(["GET"])
-def use(request):
-    return render(request, "apps/election/use.html")
+# @require_http_methods(["GET"])
+# def use(request):
+#     return render(request, "apps/election/use.html")
 
 
 @cache_page(CACHE_TTL)

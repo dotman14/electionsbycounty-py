@@ -16,7 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from election.views import (
+from election.views import (  # use,
     ajax_get_county,
     all_county_for_state,
     all_election_type,
@@ -24,7 +24,6 @@ from election.views import (
     credit,
     home,
     result,
-    use,
 )
 
 urlpatterns = [
@@ -32,7 +31,7 @@ urlpatterns = [
     path("", home, name="home"),
     path("credit", credit, name="credit"),
     path("getcounty/", ajax_get_county, name="auto-ajax"),
-    path("use", use, name="use"),
+    # path("use", use, name="use"),
     path(
         "result/<str:election_type>/<str:state_code>/",
         all_county_for_state,
