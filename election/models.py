@@ -7,14 +7,28 @@ from django.db.models.functions import Round
 
 
 class Party(models.Model):
+    class Meta:
+        verbose_name_plural = "Parties"
+        ordering = ["party_name"]
+
     party_name = models.CharField(max_length=255)
     party_color_rgb = models.CharField(max_length=255)
     party_logo = models.CharField(max_length=255)
 
+    def __str__(self):
+        return f"{self.party_name}"
+
 
 class State(models.Model):
+    class Meta:
+        verbose_name_plural = "States"
+        ordering = ["state_name"]
+
     code = models.CharField("State Abbr.", max_length=2)
     state_name = models.CharField("Name of State", max_length=50)
+
+    def __str__(self):
+        return f"{self.state_name}"
 
 
 class CountyManager(models.Manager):
@@ -28,6 +42,10 @@ class CountyManager(models.Manager):
 
 
 class County(models.Model):
+    class Meta:
+        verbose_name_plural = "Counties"
+        ordering = ["county_name"]
+
     state = models.ForeignKey("State", on_delete=models.CASCADE, related_name="state")
     county_name = models.CharField("County Name", max_length=255)
     objects = CountyManager()
@@ -37,9 +55,15 @@ class County(models.Model):
 
 
 class Candidate(models.Model):
+    class Meta:
+        ordering = ["candidate_name"]
+
     candidate_name = models.CharField(max_length=255)
     candidate_party = models.ForeignKey("Party", on_delete=models.CASCADE)
     candidate_image_path = models.CharField("Path to Candidate Image", max_length=255)
+
+    def __str__(self):
+        return f"{self.candidate_name} ({self.candidate_party.party_name})"
 
 
 class ElectionDataManager(models.Manager):
@@ -164,6 +188,7 @@ class ElectionDataManager(models.Manager):
 
 class ElectionData(models.Model):
     class Meta:
+        verbose_name_plural = "Election Data"
         ordering = ["-date_of_election", "-total_vote"]
 
     ELECTION_TYPE = [
@@ -210,6 +235,9 @@ class ElectionNoteManager(models.Manager):
 
 
 class ElectionNote(models.Model):
+    class Meta:
+        verbose_name_plural = "Election Notes"
+
     ELECTION_TYPE = [
         ("presidential", "Presidential"),
         ("governorship", "Governorship"),
@@ -221,3 +249,6 @@ class ElectionNote(models.Model):
     state = models.ForeignKey("State", on_delete=models.CASCADE)
     election_notes = models.TextField("Election Notes", null=True)
     objects = ElectionNoteManager()
+
+    def __str__(self):
+        return f"{self.election_notes}"

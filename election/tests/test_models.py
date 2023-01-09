@@ -283,6 +283,9 @@ class TestModels(TestCase):
         )
         self.assertInHTML("John, Doe Mary", response.content.decode())
         self.assertInHTML("2,999", response.content.decode())
-        _url_404 = reverse("result", kwargs={"election_type": "presidential", "state_code": "NY", "county": "new york"})
+        _url_404 = reverse(
+            "result",
+            kwargs={"election_type": "presidential", "state_code": "NY", "county": "new york"},
+        )
         _response_404 = self.client.get(_url_404)
         self.assertEqual(_response_404.status_code, HTTPStatus.NOT_FOUND)

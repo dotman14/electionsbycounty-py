@@ -7,4 +7,3 @@ omit =
     */asgi.py
     manage.py
 source = electionsbycounty
-
