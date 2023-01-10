@@ -164,6 +164,9 @@ class TestModels(TestCase):
         with pytest.raises(Exception):
             State.objects.get(code="TX")
 
+    def test_state_string(self):
+        self.assertEqual(str(self.state), "California")
+
     def test_county_model(self):
         self.assertEqual(self.county.state.state_name, "California")
         self.assertEqual(self.county.state.code, "CA")
@@ -201,6 +204,9 @@ class TestModels(TestCase):
         self.assertEqual(
             ElectionNote.objects.filter(area_type="Governorship", area_name="Cook").count(), 0
         )
+
+    def test_election_note_str(self):
+        self.assertEqual(str(self.election_note), "Write-in votes")
 
     def test_election_note_manager(self):
         election_note = ElectionNote.objects.get_election_notes(
