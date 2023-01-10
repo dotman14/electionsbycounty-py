@@ -51,7 +51,7 @@ jobs:
     - name: Lint with Flake8
       run: |
         pip install flake8
-        flake8 . --select=B,C,E,F,W,T4,B9 --ignore=W503,C901,E722 --max-line-length=18 --max-complexity=100 --exclude=.git,*migrations*,settings_ci.py
+        flake8 . --select=B,C,E,F,W,T4,B9 --ignore=W503,C901,E722 --max-line-length=100 --max-complexity=18 --exclude=.git,*migrations*,settings_ci.py
     - name: Run Migrations
       run: |
         python manage.py migrate
