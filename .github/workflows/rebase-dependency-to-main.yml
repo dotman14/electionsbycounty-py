@@ -3,7 +3,7 @@ on:
   workflow_run:
     workflows: ["Django CI"]
     types: [completed]
-    
+
 jobs:
   on-success:
     runs-on: ubuntu-latest
