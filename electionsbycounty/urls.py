@@ -14,9 +14,18 @@ Including another URLconf
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
 from django.contrib import admin
+from django.contrib.sitemaps.views import sitemap
 from django.urls import path
 
-from election.views import (  # use,
+from election.sitemaps import (
+    AllElectionTypes,
+    AllStateCountyGovernorship,
+    AllStateCountyPresidential,
+    AllStateCountyResultGovernorship,
+    AllStateCountyResultPresidential,
+    ElectionsByCountyStatic,
+)
+from election.views import (
     ajax_get_county,
     all_county_for_state,
     all_election_type,
@@ -26,12 +35,20 @@ from election.views import (  # use,
     result,
 )
 
+sitemaps = {
+    "static": ElectionsByCountyStatic,
+    "election_types": AllElectionTypes,
+    "state_presidential": AllStateCountyPresidential,
+    "state_governorship": AllStateCountyGovernorship,
+    "county_result_presidential": AllStateCountyResultPresidential,
+    "county_result_governorship": AllStateCountyResultGovernorship,
+}
+
 urlpatterns = [
     path("ebc-admin-page/", admin.site.urls),
     path("", home, name="home"),
     path("credit", credit, name="credit"),
     path("getcounty/", ajax_get_county, name="auto-ajax"),
-    # path("use", use, name="use"),
     path(
         "result/<str:election_type>/<str:state_code>/",
         all_county_for_state,
@@ -51,6 +68,9 @@ urlpatterns = [
         "result/<str:election_type>/<str:state_code>/<str:county>",
         result,
         name="result",
+    ),
+    path(
+        "sitemap.xml", sitemap, {"sitemaps": sitemaps}, name="django.contrib.sitemaps.views.sitemap"
     ),
 ]
 

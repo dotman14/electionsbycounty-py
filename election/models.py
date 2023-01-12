@@ -67,6 +67,15 @@ class Candidate(models.Model):
 
 
 class ElectionDataManager(models.Manager):
+    def get_state_county_sitemap(self, election_type):
+        return (
+            self.select_related("state")
+            .values("state__code", "area_name")
+            .filter(election_type__iexact=election_type)
+            .annotate(Count("id"))
+            .values("state__code", "area_name")
+        )
+
     def get_election_data(self, election_type, county, state_id):
         _data = (
             self.select_related("candidate")
