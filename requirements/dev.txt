@@ -1,7 +1,7 @@
 -r base.txt
 
 pre-commit==2.21.0
-identify==2.5.12
+identify==2.5.15
 django-stubs==1.9.0
 mypy==0.991
 mock-django==0.6.10
