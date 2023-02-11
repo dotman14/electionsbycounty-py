@@ -50,8 +50,8 @@ urlpatterns = [
     path("", home, name="home"),
     path("credit", credit, name="credit"),
     path(
-        "robot.txt",
-        TemplateView.as_view(template_name="apps/election/robot.txt", content_type="text/plain"),
+        "robots.txt",
+        TemplateView.as_view(template_name="apps/election/robots.txt", content_type="text/plain"),
     ),
     path("getcounty/", ajax_get_county, name="auto-ajax"),
     path(
