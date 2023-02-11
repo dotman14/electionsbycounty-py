@@ -90,7 +90,6 @@ def credit(request):
     return render(request, "apps/election/credit.html")
 
 
-
 @cache_page(CACHE_TTL)
 @require_http_methods(["GET"])
 def all_county_for_state(request, election_type: str, state_code: str):

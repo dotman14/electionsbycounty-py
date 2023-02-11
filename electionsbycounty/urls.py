@@ -16,6 +16,7 @@ Including another URLconf
 from django.contrib import admin
 from django.contrib.sitemaps.views import sitemap
 from django.urls import path
+from django.views.generic import TemplateView
 
 from election.sitemaps import (
     AllElectionTypes,
@@ -34,7 +35,6 @@ from election.views import (
     home,
     result,
 )
-from django.views.generic import TemplateView
 
 sitemaps = {
     "static": ElectionsByCountyStatic,
@@ -49,7 +49,10 @@ urlpatterns = [
     path("ebc-admin-page/", admin.site.urls),
     path("", home, name="home"),
     path("credit", credit, name="credit"),
-    path("robot.txt",TemplateView.as_view(template_name="apps/election/robot.txt", content_type='text/plain')),
+    path(
+        "robot.txt",
+        TemplateView.as_view(template_name="apps/election/robot.txt", content_type="text/plain"),
+    ),
     path("getcounty/", ajax_get_county, name="auto-ajax"),
     path(
         "result/<str:election_type>/<str:state_code>/",

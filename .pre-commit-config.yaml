@@ -1,6 +1,6 @@
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.1.0
+    rev: v4.4.0
     hooks:
       - id: check-ast
       - id: check-case-conflict
@@ -12,7 +12,7 @@ repos:
       - id: trailing-whitespace
       - id: mixed-line-ending
   - repo: https://github.com/psf/black
-    rev: '22.8.0'
+    rev: '23.1.0'
     hooks:
       - id: black
         exclude: |
@@ -26,24 +26,32 @@ repos:
         args: ["--line-length", "100"]
 
   - repo: https://github.com/pycqa/isort
-    rev: '5.10.1'
+    rev: '5.12.0'
     hooks:
       - id: isort
         name: isort
         args: ["--profile", "black"]
 
   - repo: https://github.com/pycqa/flake8
-    rev: '5.0.4'
+    rev: '6.0.0'
     hooks:
       - id: flake8
         args: ['--config=.flake8']
   - repo: https://github.com/rtts/djhtml
-    rev: v1.5.2
+    rev: v2.0.0
     hooks:
       - id: djhtml
 #    args: [--tabwidth=4]
 
   - repo: https://github.com/asottile/pyupgrade
-    rev: v2.38.2
+    rev: v3.3.1
     hooks:
       - id: pyupgrade
+
+  - repo: https://github.com/charliermarsh/ruff-pre-commit
+    # Ruff version.
+    rev: 'v0.0.244'
+    hooks:
+      - id: ruff
+        exclude: '/migrations/'
+        args: [ "--fix", "--line-length=100" ]

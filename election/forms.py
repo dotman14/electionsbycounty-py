@@ -8,7 +8,7 @@ from election.models import ElectionData
 
 class ElectionForm(forms.Form):
     def __init__(self, *args, **kwargs):
-        super(ElectionForm, self).__init__(*args, **kwargs)
+        super().__init__(*args, **kwargs)
 
         for i, f in self.fields.items():
             self.fields[i].required = True
