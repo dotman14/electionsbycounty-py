@@ -7,6 +7,6 @@ mypy==1.7.1
 mock-django==0.6.10
 pytest-django==4.7.0
 django-debug-toolbar==4.2.0
-coverage==7.3.2
+coverage==7.3.3
 gunicorn==21.2.0
 pytest==7.4.3
