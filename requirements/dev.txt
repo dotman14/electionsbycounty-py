@@ -1,8 +1,8 @@
 -r base.txt
 
 pre-commit==3.5.0
-django-stubs==4.2.6
-django-stubs==4.2.6
+django-stubs==5.0.0
+django-stubs==5.0.0
 mypy==1.7.1
 mock-django==0.6.10
 pytest-django==4.7.0
