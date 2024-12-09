@@ -4,6 +4,6 @@ whitenoise==6.8.2
 psycopg2-binary==2.9.9
 gunicorn==22.0.0
 sentry-sdk==2.19.0
-redis==5.0.8
+redis==5.2.1
 hiredis==2.2.3
 logtail-python==0.2.7
