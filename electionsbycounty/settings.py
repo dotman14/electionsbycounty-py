@@ -81,14 +81,6 @@ TEMPLATES = [
 
 
 CACHE_TTL = 60 * 60 * 24 * 90
-CACHES = {
-    "default": {
-        "BACKEND": "django.core.cache.backends.redis.RedisCache",
-        "LOCATION": os.getenv("REDISCLOUD_URL"),
-        "TIMEOUT": 60 * 60 * 24 * 90,
-        "KEY_PREFIX": "ebc",
-    }
-}
 
 WSGI_APPLICATION = "electionsbycounty.wsgi.application"
 
